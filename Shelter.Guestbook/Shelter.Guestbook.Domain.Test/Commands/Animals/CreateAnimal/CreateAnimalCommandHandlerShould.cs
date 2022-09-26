@@ -1,4 +1,7 @@
-﻿using Shelter.Guestbook.Domain.Animals.CreateAnimal;
+﻿using Moq;
+using Shelter.Guestbook.Domain.Animals.CreateAnimal;
+using Shelter.Guestbook.Domain.Entities;
+using Shelter.Guestbook.Domain.Repositories;
 using Xunit;
 
 namespace Shelter.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
@@ -10,12 +13,14 @@ namespace Shelter.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
         [InlineData("","","", false)]
         public async void ReturnSuccessfulResult(string name, string species, string description, bool isSuccess)
         {
-            //var createAnimalCommand = new CreateAnimalCommand(name, species, description);
-            //var handler = new CreateAnimalCommandHandler();
+            var animalRepositoryMock = new Mock<IAnimalsRepository>();
 
-            //var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
+            var createAnimalCommand = new CreateAnimalCommand(name, species, description);
+            var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object);
 
-            //Assert.Equal(isSuccess, result.IsSuccess);
+            var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
+
+            Assert.Equal(isSuccess, result.IsSuccess);
         }
     }
 }

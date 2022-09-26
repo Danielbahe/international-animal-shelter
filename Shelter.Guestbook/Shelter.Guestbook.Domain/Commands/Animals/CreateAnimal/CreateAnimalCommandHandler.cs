@@ -20,12 +20,13 @@ namespace Shelter.Guestbook.Domain.Animals.CreateAnimal
             if (animal.IsFailure)
             {
                 //todo log
+                return animal;
             }
 
             animalRepository.AddAnimal(animal.Value);
-            await animalRepository.Save();
+            await animalRepository.SaveAsync();
 
-            return await Task.FromResult(animal);
+            return animal;
         }
     }
 }

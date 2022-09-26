@@ -17,7 +17,7 @@ namespace Shelter.Guestbook.DataAccess
             context.Animals.Add(animal);
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
         }
