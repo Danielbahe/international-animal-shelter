@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using System;
 
 namespace Shelter.Infrastructure
 {
