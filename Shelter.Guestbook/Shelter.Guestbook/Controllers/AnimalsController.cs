@@ -30,7 +30,6 @@ namespace Shelter.Guestbook.Api.Controllers
             {
                 return BadRequest(result.Error);
             }
-            // todo what should we response?
         }
     }
 }

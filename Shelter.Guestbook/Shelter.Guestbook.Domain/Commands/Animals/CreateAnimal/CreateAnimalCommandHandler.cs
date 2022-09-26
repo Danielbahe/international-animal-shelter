@@ -1,20 +1,30 @@
 ﻿using CSharpFunctionalExtensions;
 using MediatR;
 using Shelter.Guestbook.Domain.Entities;
+using Shelter.Guestbook.Domain.Repositories;
 
 namespace Shelter.Guestbook.Domain.Animals.CreateAnimal
 {
     public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, Result<Animal>>
     {
+        private readonly IAnimalsRepository animalRepository;
+
+        public CreateAnimalCommandHandler(IAnimalsRepository animalRepository)
+        {
+            this.animalRepository = animalRepository;
+        }
+
         public async Task<Result<Animal>> Handle(CreateAnimalCommand request, CancellationToken cancellationToken)
         {
-            //todo validate
             var animal = Animal.Create(request);
             if (animal.IsFailure)
             {
                 //todo log
-            }            
-            //todo save Entity framework
+            }
+
+            animalRepository.AddAnimal(animal.Value);
+            await animalRepository.Save();
+
             return await Task.FromResult(animal);
         }
     }

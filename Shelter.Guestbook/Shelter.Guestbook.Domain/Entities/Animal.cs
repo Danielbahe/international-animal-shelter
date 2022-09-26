@@ -4,7 +4,7 @@ using Shelter.Infrastructure;
 
 namespace Shelter.Guestbook.Domain.Entities
 {
-    public class Animal
+    public class Animal : Entity
     {
         public string Name { get; private set; }
         public string Species { get; private set; }
