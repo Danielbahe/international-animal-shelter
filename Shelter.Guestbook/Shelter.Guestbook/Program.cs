@@ -15,16 +15,17 @@ builder.Services.AddMediatR(AssembliesHelper.GetAllAssemblies());
 builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
 
 builder.Services.AddDbContext<GuestbookContext>(
-    dbContextOptions => dbContextOptions.UseSqlite("Data Source=Guestbook.db")); 
+    dbContextOptions => dbContextOptions.UseSqlServer(@"Server=db;Database=master;User=sa;Password=Your_password123;")); 
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

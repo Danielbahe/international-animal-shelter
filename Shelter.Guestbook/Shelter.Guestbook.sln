@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shelter.Guestbook.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shelter.Infrastructure", "Shelter.Infrastructure\Shelter.Infrastructure.csproj", "{1CB8A1E9-151F-4607-9AA3-D97AD04AE5AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shelter.Guestbook.Domain.Test", "Shelter.Guestbook.Domain.Test\Shelter.Guestbook.Domain.Test.csproj", "{FA25E792-9605-4B72-A615-9CBEB77EF398}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shelter.Guestbook.DataAccess", "Shelter.Guestbook.DataAccess\Shelter.Guestbook.DataAccess.csproj", "{AC32E367-5684-46AA-8F46-F17D5C2D07B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shelter.Guestbook.DataAccess", "Shelter.Guestbook.DataAccess\Shelter.Guestbook.DataAccess.csproj", "{AC32E367-5684-46AA-8F46-F17D5C2D07B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{1CB8A1E9-151F-4607-9AA3-D97AD04AE5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CB8A1E9-151F-4607-9AA3-D97AD04AE5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CB8A1E9-151F-4607-9AA3-D97AD04AE5AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA25E792-9605-4B72-A615-9CBEB77EF398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA25E792-9605-4B72-A615-9CBEB77EF398}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA25E792-9605-4B72-A615-9CBEB77EF398}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA25E792-9605-4B72-A615-9CBEB77EF398}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC32E367-5684-46AA-8F46-F17D5C2D07B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC32E367-5684-46AA-8F46-F17D5C2D07B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC32E367-5684-46AA-8F46-F17D5C2D07B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
