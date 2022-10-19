@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Shelter.Guestbook.Api;
 using Shelter.Guestbook.DataAccess;
 using Shelter.Guestbook.Domain.Repositories;
@@ -15,7 +16,7 @@ builder.Services.AddMediatR(AssembliesHelper.GetAllAssemblies());
 builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
 
 builder.Services.AddDbContext<GuestbookContext>(
-    dbContextOptions => dbContextOptions.UseSqlServer(@"Server=db;Database=master;User=sa;Password=Your_password123;")); 
+    dbContextOptions => dbContextOptions.UseSqlServer(@"Server=database-sql,1433;Database=master;User=sa;Password=Your_password123;"));
 
 var app = builder.Build();
 
@@ -31,5 +32,17 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<GuestbookContext>();
+        db.Database.Migrate();
+    }
+}
+catch (Exception)
+{
+	throw;
+}
 
 app.Run();
