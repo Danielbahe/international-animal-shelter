@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Shelter.Guestbook.Api;
 using Shelter.Guestbook.DataAccess;
 using Shelter.Guestbook.Domain.Repositories;
@@ -17,6 +16,8 @@ builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
 
 builder.Services.AddDbContext<GuestbookContext>(
     dbContextOptions => dbContextOptions.UseSqlServer(@"Server=database-sql,1433;Database=master;User=sa;Password=Your_password123;"));
+
+MigrationsHelper.ApplyMigrations();
 
 var app = builder.Build();
 
