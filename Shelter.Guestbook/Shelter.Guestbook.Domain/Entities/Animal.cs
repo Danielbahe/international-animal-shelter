@@ -27,12 +27,14 @@ namespace Shelter.Guestbook.Domain.Entities
 
         private Result<Animal> SetName(string name)
         {
+            name = string.IsNullOrEmpty(name) ? string.Empty : name;
             Name = name.Trim();
             return Result.Success(this);
         }
 
         private Result<Animal> SetDescription(string description)
         {
+            description = string.IsNullOrEmpty(description) ? string.Empty : description;
             Description = description.Trim();
             return Result.Success(this);
         }

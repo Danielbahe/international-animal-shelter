@@ -7,14 +7,22 @@ namespace Shelter.Guestbook.Domain.Test.Entities
     public class AnimalShould
     {
         [Theory]
-        [InlineData("","Cat","", true)]
-        [InlineData("","Cat","Is cute", true)]
-        [InlineData("Lua","Cat","", true)]
-        [InlineData("Lua","Cat", "Is cute", true)]
-        [InlineData("","","", false)]
-        [InlineData("Lua","", "Is cute", false)]
-        [InlineData("","", "Is cute", false)]
-        [InlineData("Lua","", "", false)]
+        [InlineData("", "Cat", "", true)]
+        [InlineData("", "Cat", "Is cute", true)]
+        [InlineData("Lua", "Cat", "", true)]
+        [InlineData("Lua", "Cat", "Is cute", true)]
+        [InlineData("", "", "", false)]
+        [InlineData("Lua", "", "Is cute", false)]
+        [InlineData("", "", "Is cute", false)]
+        [InlineData("Lua", "", "", false)]
+        [InlineData(null," Cat", null, true)]
+        [InlineData(null, "Cat", "Is cute", true)]
+        [InlineData("Lua", "Cat", null, true)]
+        [InlineData(null, null, null, false)]
+        [InlineData("Lua", null, "Is cute", false)]
+        [InlineData(null, null, "Is cute", false)]
+        [InlineData("Lua", null, null, false)]
+
         public void CreateAnimalSuccessfully(string name, string species, string description, bool isSuccess)
         {
             var createAnimalCommand = new CreateAnimalCommand(name, species, description);

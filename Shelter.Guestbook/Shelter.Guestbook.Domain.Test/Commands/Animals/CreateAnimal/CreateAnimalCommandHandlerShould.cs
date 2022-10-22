@@ -1,4 +1,5 @@
 ﻿using Moq;
+using Serilog;
 using Shelter.Guestbook.Domain.Animals.CreateAnimal;
 using Shelter.Guestbook.Domain.Entities;
 using Shelter.Guestbook.Domain.Repositories;
@@ -14,9 +15,10 @@ namespace Shelter.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
         public async void ReturnSuccessfulResult(string name, string species, string description, bool isSuccess)
         {
             var animalRepositoryMock = new Mock<IAnimalsRepository>();
+            var loggerMock = new Mock<ILogger>();
 
             var createAnimalCommand = new CreateAnimalCommand(name, species, description);
-            var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object);
+            var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object);
 
             var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
 

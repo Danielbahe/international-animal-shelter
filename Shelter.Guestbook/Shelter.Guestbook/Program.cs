@@ -1,10 +1,18 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Shelter.Guestbook.Api;
 using Shelter.Guestbook.DataAccess;
 using Shelter.Guestbook.Domain.Repositories;
+using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+builder.Host.UseSerilog();
+builder.Services.AddSingleton(typeof(ILogger), Log.Logger);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -33,4 +41,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Error(ex, "Something went wrong");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
