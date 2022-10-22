@@ -21,6 +21,8 @@ services:
       SA_PASSWORD: "Your_password123"
       ACCEPT_EULA: "Y"
       MSSQL_PID: Express
-    # volumes:
-      # - c:/data/mssql:/var/opt/mssql
-      # - ~/docker/sqlserver-data:/var/opt/mssql
+    volumes:
+      - mssql-server-linux-data:/var/opt/mssql/data
+
+volumes:
+  mssql-server-linux-data:
