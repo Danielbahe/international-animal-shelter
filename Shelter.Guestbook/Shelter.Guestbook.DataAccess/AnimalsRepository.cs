@@ -1,25 +1,31 @@
-﻿using Shelter.Guestbook.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shelter.Guestbook.Domain.Entities;
 using Shelter.Guestbook.Domain.Repositories;
 
 namespace Shelter.Guestbook.DataAccess
 {
     public class AnimalsRepository : IAnimalsRepository
     {
-        public GuestbookContext context { get; set; }
+        private GuestbookContext Context { get; set; }
 
         public AnimalsRepository(GuestbookContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
         public void AddAnimal(Animal animal)
         {
-            context.Animals.Add(animal);
+            Context.Animals.Add(animal);
         }
 
         public async Task SaveAsync()
         {
-            await context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Animal>> GetAll()
+        {
+            return await Context.Animals.ToListAsync();
         }
     }
 }

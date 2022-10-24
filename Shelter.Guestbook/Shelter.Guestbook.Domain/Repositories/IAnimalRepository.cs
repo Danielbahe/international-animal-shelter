@@ -5,5 +5,6 @@ namespace Shelter.Guestbook.Domain.Repositories
     public interface IAnimalsRepository : IRepository
     {
         void AddAnimal(Animal animal);
+        Task<IEnumerable<Animal>> GetAll();
     }
 }

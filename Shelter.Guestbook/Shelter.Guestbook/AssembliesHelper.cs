@@ -11,10 +11,11 @@ namespace Shelter.Guestbook.Api
 
         public static Assembly[] GetAllAssemblies()
         {
-            var assemblies = new List<Assembly>();
-
-            assemblies.Add(GetAssembly());
-            assemblies.Add(Domain.Module.GetAssembly());
+            var assemblies = new List<Assembly>
+            {
+                GetAssembly(),
+                Domain.Module.GetAssembly()
+            };
 
             return assemblies.ToArray();
         }

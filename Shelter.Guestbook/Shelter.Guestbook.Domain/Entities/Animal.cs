@@ -10,7 +10,7 @@ namespace Shelter.Guestbook.Domain.Entities
         public string Species { get; private set; }
         public string Description { get; private set; }
 
-        private Animal()
+        public Animal()
         {
         }
 
