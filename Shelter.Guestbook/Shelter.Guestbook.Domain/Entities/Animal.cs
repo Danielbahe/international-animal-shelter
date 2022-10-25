@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using Shelter.Guestbook.Domain.Animals.CreateAnimal;
+using Shelter.Guestbook.Domain.Commands.Animals.UpdateAnimal;
 using Shelter.Infrastructure;
 
 namespace Shelter.Guestbook.Domain.Entities
@@ -23,6 +24,15 @@ namespace Shelter.Guestbook.Domain.Entities
                 .AddResult(animal.SetSpecies(command.Species))
                 .AddResult(animal.SetDescription(command.Description))
                 .CombineIn(animal);
+        }
+
+        public Result<Animal> Update(UpdateAnimalCommand command)
+        {
+            return Constraints
+                .AddResult(SetName(command.Name))
+                .AddResult(SetSpecies(command.Species))
+                .AddResult(SetDescription(command.Description))
+                .CombineIn(this);
         }
 
         private Result<Animal> SetName(string name)

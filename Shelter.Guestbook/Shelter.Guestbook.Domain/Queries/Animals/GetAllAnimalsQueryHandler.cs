@@ -24,7 +24,7 @@ namespace Shelter.Guestbook.Domain.Queries.Animals
 
         public async Task<IEnumerable<Animal>> Handle(GetAllAnimalsQuery request, CancellationToken cancellationToken)
         {
-            var animals = await animalRepository.GetAll();
+            var animals = await animalRepository.GetAllAsync();
             logger.Debug("Animals retrieved: {animals}", animals);
 
             return animals;

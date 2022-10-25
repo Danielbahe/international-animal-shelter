@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using Shelter.Guestbook.Domain.Entities;
 using Shelter.Guestbook.Domain.Repositories;
 
@@ -23,9 +24,21 @@ namespace Shelter.Guestbook.DataAccess
             await Context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Animal>> GetAll()
+        public async Task<IEnumerable<Animal>> GetAllAsync()
         {
             return await Context.Animals.ToListAsync();
+        }
+
+        public async Task<Result<Animal>> GetByIdAsync(Guid id)
+        {
+            var animal = await Context.Animals.FirstOrDefaultAsync(a => a.Id == id);
+
+            return animal == null ? Result.Failure<Animal>($"Animal with Id: {id} not found") : Result.Success(animal);
+        }
+
+        public void UpdateAnimal(Animal animal)
+        {
+            Context.Update(animal);
         }
     }
 }
