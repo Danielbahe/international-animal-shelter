@@ -26,14 +26,19 @@ namespace Shelter.Guestbook.DataAccess
 
         public async Task<IEnumerable<Animal>> GetAllAsync()
         {
-            return await Context.Animals.ToListAsync();
+            return await Context.Animals.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         public async Task<Result<Animal>> GetByIdAsync(Guid id)
         {
-            var animal = await Context.Animals.FirstOrDefaultAsync(a => a.Id == id);
+            var animal = await Context.Animals.FirstOrDefaultAsync(a => a.Id == id && !a.IsDeleted);
 
             return animal == null ? Result.Failure<Animal>($"Animal with Id: {id} not found") : Result.Success(animal);
+        }
+
+        public void DeleteAnimal(Animal animalToDelete)
+        {
+            Context.Animals.Update(animalToDelete);
         }
 
         public void UpdateAnimal(Animal animal)

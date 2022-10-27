@@ -35,6 +35,11 @@ namespace Shelter.Guestbook.Domain.Entities
                 .CombineIn(this);
         }
 
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
+
         private Result<Animal> SetName(string name)
         {
             name = string.IsNullOrEmpty(name) ? string.Empty : name;

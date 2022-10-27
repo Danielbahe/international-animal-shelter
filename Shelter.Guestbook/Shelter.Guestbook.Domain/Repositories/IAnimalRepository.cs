@@ -9,5 +9,6 @@ namespace Shelter.Guestbook.Domain.Repositories
         Task<IEnumerable<Animal>> GetAllAsync();
         Task<Result<Animal>> GetByIdAsync(Guid Id);
         void UpdateAnimal(Animal animal);
+        void DeleteAnimal(Animal animalToDelete);
     }
 }

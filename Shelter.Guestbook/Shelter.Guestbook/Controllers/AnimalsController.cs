@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shelter.Guestbook.Api.Dto;
 using Shelter.Guestbook.Api.Models;
 using Shelter.Guestbook.Domain.Animals.CreateAnimal;
+using Shelter.Guestbook.Domain.Commands.Animals.DeleteAnimal;
 using Shelter.Guestbook.Domain.Commands.Animals.UpdateAnimal;
 using Shelter.Guestbook.Domain.Queries.Animals;
 
@@ -53,6 +54,22 @@ namespace Shelter.Guestbook.Api.Controllers
         public async Task<IActionResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
         {
             var command = mapper.Map<UpdateAnimalCommand>(request);
+            var result = await mediator.Send(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(result.Error);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
+        {
+            var command = mapper.Map<DeleteAnimalCommand>(request);
             var result = await mediator.Send(command);
 
             if (result.IsSuccess)
