@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Shelter.Guestbook.Api;
 using Shelter.Guestbook.Api.Profiles;
@@ -28,14 +29,16 @@ builder.Services.AddAutoMapper(AssembliesHelper.GetAllAssemblies());
 builder.Services.AddDbContext<GuestbookContext>(
     dbContextOptions => dbContextOptions.UseSqlServer(@"Server=database-sql,1433;Database=master;User=sa;Password=Your_password123;"));
 
-MigrationsHelper.ApplyMigrations();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<GuestbookContext>();
+    db.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
