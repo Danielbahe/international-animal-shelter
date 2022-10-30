@@ -7,13 +7,17 @@ namespace Shelter.Guestbook.DataAccess.Migrations
     {
         public override void Up()
         {
-            Alter.Table("Animals")
-                .AddColumn("IsDeleted").AsBoolean().NotNullable().WithDefaultValue(0);
+            Create.Table("Shelters")
+                .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
+                .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("Address").AsString().NotNullable()
+                .WithColumn("Email").AsString()
+                .WithColumn("PhoneNumber").AsString();
         }
 
         public override void Down()
         {
-            Delete.Table("Animals");
+            Delete.Table("Shelters");
         }
     }
 }
