@@ -15,7 +15,7 @@ namespace Shelter.Guestbook.Domain.Entities
         {
         }
 
-        public static Result<Animal> Create(CreateAnimalCommand command)
+        public static Result<Animal> Create(CreateAnimalCommandRequest command)
         {
             var animal = new Animal();
 
@@ -26,7 +26,7 @@ namespace Shelter.Guestbook.Domain.Entities
                 .CombineIn(animal);
         }
 
-        public Result<Animal> Update(UpdateAnimalCommand command)
+        public Result<Animal> Update(UpdateAnimalCommandRequest command)
         {
             return Constraints
                 .AddResult(SetName(command.Name))

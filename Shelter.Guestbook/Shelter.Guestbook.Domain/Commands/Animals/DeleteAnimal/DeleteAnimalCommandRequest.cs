@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Shelter.Guestbook.Domain.Commands.Animals.DeleteAnimal
 {
-    public record DeleteAnimalCommand : IRequest<Result>
+    public record DeleteAnimalCommandRequest : IRequest<Result>
     {
         public Guid Id { get; init; }
 
-        public DeleteAnimalCommand(Guid id)
+        public DeleteAnimalCommandRequest(Guid id)
         {
             Id = id;
         }

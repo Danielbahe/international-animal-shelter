@@ -25,7 +25,7 @@ namespace Shelter.Guestbook.Domain.Test.Entities
 
         public void CreateAnimalSuccessfully(string name, string species, string description, bool isSuccess)
         {
-            var createAnimalCommand = new CreateAnimalCommand(name, species, description);
+            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description);
 
             var animal = Animal.Create(createAnimalCommand);
 
@@ -35,7 +35,7 @@ namespace Shelter.Guestbook.Domain.Test.Entities
         [Fact]
         public void SetDataProperly()
         {
-            var createAnimalCommand = new CreateAnimalCommand("Lua", "Cat", "Is Cute");
+            var createAnimalCommand = new CreateAnimalCommandRequest("Lua", "Cat", "Is Cute");
 
             var animal = Animal.Create(createAnimalCommand);
 

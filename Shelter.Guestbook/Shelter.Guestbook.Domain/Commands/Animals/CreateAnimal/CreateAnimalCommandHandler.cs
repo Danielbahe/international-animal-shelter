@@ -6,7 +6,7 @@ using Shelter.Guestbook.Domain.Repositories;
 
 namespace Shelter.Guestbook.Domain.Animals.CreateAnimal
 {
-    public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, Result<Animal>>
+    public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommandRequest, Result<Animal>>
     {
         private readonly IAnimalsRepository animalRepository;
         private readonly ILogger logger;
@@ -17,7 +17,7 @@ namespace Shelter.Guestbook.Domain.Animals.CreateAnimal
             this.logger = logger;
         }
 
-        public async Task<Result<Animal>> Handle(CreateAnimalCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Animal>> Handle(CreateAnimalCommandRequest request, CancellationToken cancellationToken)
         {
             var animal = Animal.Create(request);
             if (animal.IsFailure)

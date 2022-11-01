@@ -6,7 +6,7 @@ using Shelter.Guestbook.Domain.Repositories;
 
 namespace Shelter.Guestbook.Domain.Commands.Animals.DeleteAnimal
 {
-    internal class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommand, Result>
+    internal class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommandRequest, Result>
     {
         private readonly IAnimalsRepository animalRepository;
         private readonly ILogger logger;
@@ -17,7 +17,7 @@ namespace Shelter.Guestbook.Domain.Commands.Animals.DeleteAnimal
             this.logger = logger;
         }
 
-        public async Task<Result> Handle(DeleteAnimalCommand command, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteAnimalCommandRequest command, CancellationToken cancellationToken)
         {
             var animalToDelete = await GetAnimalByIdAsync(command.Id);
             await DeleteAnimalAsync(animalToDelete.Value);

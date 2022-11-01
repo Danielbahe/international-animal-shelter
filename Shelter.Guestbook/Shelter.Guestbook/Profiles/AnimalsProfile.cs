@@ -14,9 +14,9 @@ namespace Shelter.Guestbook.Api.Profiles
         {
             CreateMap<Animal, AnimalBasicInfoResponse>();
 
-            CreateMap<CreateAnimalRequest, CreateAnimalCommand>();
-            CreateMap<UpdateAnimalRequest, UpdateAnimalCommand>();
-            CreateMap<DeleteAnimalRequest, DeleteAnimalCommand>();
+            CreateMap<CreateAnimalRequest, CreateAnimalCommandRequest>();
+            CreateMap<UpdateAnimalRequest, UpdateAnimalCommandRequest>();
+            CreateMap<DeleteAnimalRequest, DeleteAnimalCommandRequest>();
         }
     }
 }

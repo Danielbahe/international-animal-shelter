@@ -26,7 +26,7 @@ namespace Shelter.Guestbook.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAnimal([FromBody] CreateAnimalRequest request)
         {
-            var command = mapper.Map<CreateAnimalCommand>(request);
+            var command = mapper.Map<CreateAnimalCommandRequest>(request);
             var result = await mediator.Send(command);
 
             if (result.IsSuccess)
@@ -53,7 +53,7 @@ namespace Shelter.Guestbook.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
         {
-            var command = mapper.Map<UpdateAnimalCommand>(request);
+            var command = mapper.Map<UpdateAnimalCommandRequest>(request);
             var result = await mediator.Send(command);
 
             if (result.IsSuccess)
@@ -69,7 +69,7 @@ namespace Shelter.Guestbook.Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
         {
-            var command = mapper.Map<DeleteAnimalCommand>(request);
+            var command = mapper.Map<DeleteAnimalCommandRequest>(request);
             var result = await mediator.Send(command);
 
             if (result.IsSuccess)

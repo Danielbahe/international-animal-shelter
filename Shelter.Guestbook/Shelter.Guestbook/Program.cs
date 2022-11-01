@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using Shelter.Guestbook.Api;
-using Shelter.Guestbook.Api.Profiles;
 using Shelter.Guestbook.DataAccess;
 using Shelter.Guestbook.Domain.Repositories;
 using ILogger = Serilog.ILogger;
@@ -23,6 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(AssembliesHelper.GetAllAssemblies());
 
 builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
+builder.Services.AddScoped<IAnimalSheltersRepository, AnimalSheltersRepository>();
 
 builder.Services.AddAutoMapper(AssembliesHelper.GetAllAssemblies());
 

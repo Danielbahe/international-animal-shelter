@@ -17,7 +17,7 @@ namespace Shelter.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
             var animalRepositoryMock = new Mock<IAnimalsRepository>();
             var loggerMock = new Mock<ILogger>();
 
-            var createAnimalCommand = new CreateAnimalCommand(name, species, description);
+            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description);
             var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object);
 
             var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
