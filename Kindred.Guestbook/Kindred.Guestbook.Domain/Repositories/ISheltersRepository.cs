@@ -10,5 +10,6 @@ namespace Kindred.Guestbook.Domain.Repositories
         void DeleteShelter(Shelter shelterToDelete);
         void UpdateShelter(Shelter shelter);
         Task<IEnumerable<Shelter>> GetAllAsync();
+        Task<Result> ShelterExists(Guid id);
     }
 }

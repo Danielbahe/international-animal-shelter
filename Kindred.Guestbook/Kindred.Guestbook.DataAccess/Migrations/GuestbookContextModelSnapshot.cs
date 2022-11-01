@@ -37,10 +37,15 @@ namespace Kindred.Guestbook.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ShelterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Species")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShelterId");
 
                     b.ToTable("Animals");
                 });
@@ -60,6 +65,15 @@ namespace Kindred.Guestbook.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Shelters");
+                });
+
+            modelBuilder.Entity("Kindred.Guestbook.Domain.Entities.Animal", b =>
+                {
+                    b.HasOne("Kindred.Guestbook.Domain.Entities.Shelter", null)
+                        .WithMany("Animals")
+                        .HasForeignKey("ShelterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Kindred.Guestbook.Domain.Entities.Shelter", b =>
@@ -129,6 +143,11 @@ namespace Kindred.Guestbook.DataAccess.Migrations
                     b.Navigation("Email");
 
                     b.Navigation("PhoneNumber");
+                });
+
+            modelBuilder.Entity("Kindred.Guestbook.Domain.Entities.Shelter", b =>
+                {
+                    b.Navigation("Animals");
                 });
 #pragma warning restore 612, 618
         }

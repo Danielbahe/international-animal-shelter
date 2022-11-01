@@ -13,6 +13,7 @@ namespace Kindred.Guestbook.Domain.Entities
         public Address Address { get; private set; }
         public PhoneNumber PhoneNumber { get; private set; }
         public EmailAddress Email { get; private set; }
+        public List<Animal> Animals { get; set; }
 
         private Shelter()
         {

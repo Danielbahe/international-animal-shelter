@@ -10,8 +10,9 @@ namespace Kindred.Guestbook.Domain.Entities
         public string Name { get; private set; }
         public string Species { get; private set; }
         public string Description { get; private set; }
+        public Guid ShelterId { get; private set; }
 
-        public Animal()
+        private Animal()
         {
         }
 
@@ -23,6 +24,7 @@ namespace Kindred.Guestbook.Domain.Entities
                 .AddResult(animal.SetName(command.Name))
                 .AddResult(animal.SetSpecies(command.Species))
                 .AddResult(animal.SetDescription(command.Description))
+                .AddResult(animal.SetShelter(command.ShelterId))
                 .CombineIn(animal);
         }
 
@@ -57,6 +59,14 @@ namespace Kindred.Guestbook.Domain.Entities
             }
 
             Species = species.Trim();
+            return Result.Success(this);
+        }
+
+        private Result<Animal> SetShelter(Guid shelterId)
+        {
+            if (shelterId.Equals(Guid.Empty)) return Result.Failure<Animal>("Shelter assigment is mandatory");
+            ShelterId = shelterId;
+
             return Result.Success(this);
         }
     }

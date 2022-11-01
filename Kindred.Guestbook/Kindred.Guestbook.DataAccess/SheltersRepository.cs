@@ -18,11 +18,17 @@ namespace Kindred.Guestbook.DataAccess
         {
             Context.Shelters.Add(shelter);
         }
+
         public async Task<Result<Shelter>> GetByIdAsync(Guid id)
         {
             var shelter = await Context.Shelters.FirstOrDefaultAsync(a => a.Id == id && !a.IsDeleted);
-
             return shelter == null ? Result.Failure<Shelter>($"Shelter with Id: {id} not found") : Result.Success(shelter);
+        }
+
+        public async Task<Result> ShelterExists(Guid id)
+        {
+            var shelterExists = await Context.Shelters.AnyAsync(a => a.Id == id && !a.IsDeleted);
+            return shelterExists ? Result.Success() : Result.Failure("Shelter don't exist");
         }
 
         public async Task<IEnumerable<Shelter>> GetAllAsync()
