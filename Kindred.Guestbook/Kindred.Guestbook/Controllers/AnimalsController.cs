@@ -30,7 +30,6 @@ namespace Kindred.Guestbook.Api.Controllers
 
             if (result.IsSuccess)
             {
-                return Created(nameof(GetAllAnimals), result.Value.Id);
                 return Ok();
             }
             else
