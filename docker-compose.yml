@@ -7,7 +7,7 @@ services:
       - db
     build:
       context: .
-      dockerfile: Shelter.Guestbook/Shelter.Guestbook/Dockerfile
+      dockerfile: Kindred.Guestbook/Kindred.Guestbook/Dockerfile
     ports:
     - 5000:80
 
