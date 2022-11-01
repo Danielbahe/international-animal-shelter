@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Kindred.Guestbook.Api.Models;
+using Kindred.Guestbook.Api.Models.Animal;
 using Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal;

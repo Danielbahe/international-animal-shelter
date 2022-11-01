@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Kindred.Guestbook.Api.Models;
 using Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Kindred.Guestbook.Domain.Queries.Animals;
+using Kindred.Guestbook.Api.Models.Animal;
 
 namespace Kindred.Guestbook.Api.Controllers
 {
@@ -30,6 +30,7 @@ namespace Kindred.Guestbook.Api.Controllers
 
             if (result.IsSuccess)
             {
+                return Created(nameof(GetAllAnimals), result.Value.Id);
                 return Ok();
             }
             else

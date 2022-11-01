@@ -6,5 +6,10 @@ namespace Kindred.Guestbook.Domain.Entities
     {
         public Guid Id { get; protected set; }
         public bool IsDeleted { get; protected set; } = false;
+
+        public virtual void Delete()
+        {
+            IsDeleted = true;
+        }
     }
 }

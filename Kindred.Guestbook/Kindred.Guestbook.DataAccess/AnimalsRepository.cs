@@ -43,7 +43,7 @@ namespace Kindred.Guestbook.DataAccess
 
         public void UpdateAnimal(Animal animal)
         {
-            Context.Update(animal);
+            Context.Animals.Update(animal);
         }
     }
 }

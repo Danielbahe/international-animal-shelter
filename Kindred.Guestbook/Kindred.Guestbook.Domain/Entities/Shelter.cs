@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using Kindred.Guestbook.Domain.Commands.Shelters;
 using Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter;
 using Kindred.Guestbook.Domain.ValueObjects;
 using Kindred.Guestbook.Domain.ValueObjects.Commands;
@@ -70,6 +71,16 @@ namespace Kindred.Guestbook.Domain.Entities
 
             Address = result.Value;
             return Result.Success(this);
+        }
+
+        public Result<Shelter> Update(UpdateShelterCommandRequest command)
+        {
+             return Constraints
+                .AddResult(SetName(command.Name))
+                .AddResultIf(!PhoneNumber.Equals(command.PhoneNumber), SetPhoneNumber(command.PhoneNumber))
+                .AddResultIf(!Email.Equals(command.Email), SetEmail(command.Email))
+                .AddResultIf(!Address.Equals(command.Address), SetAddress(command.Address))
+                .CombineIn(this);
         }
     }
 }

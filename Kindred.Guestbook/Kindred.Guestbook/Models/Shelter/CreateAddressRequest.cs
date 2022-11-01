@@ -1,4 +1,4 @@
-﻿namespace Kindred.Guestbook.Api.Models
+﻿namespace Kindred.Guestbook.Api.Models.Shelter
 {
     public class CreateAddressRequest
     {

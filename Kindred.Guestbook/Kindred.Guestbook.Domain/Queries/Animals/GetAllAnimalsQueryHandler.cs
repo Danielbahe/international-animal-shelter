@@ -1,13 +1,7 @@
-﻿using CSharpFunctionalExtensions;
-using Kindred.Guestbook.Domain.Entities;
+﻿using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.Repositories;
 using MediatR;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kindred.Guestbook.Domain.Queries.Animals
 {
