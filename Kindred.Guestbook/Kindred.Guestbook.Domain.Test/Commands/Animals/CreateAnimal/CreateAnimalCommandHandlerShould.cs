@@ -14,10 +14,11 @@ namespace Kindred.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
         public async void ReturnSuccessfulResult(string name, string species, string description, bool isSuccess)
         {
             var animalRepositoryMock = new Mock<IAnimalsRepository>();
+            var shelterRepositoryMock = new Mock<ISheltersRepository>();
             var loggerMock = new Mock<ILogger>();
 
-            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description);
-            var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object);
+            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, Guid.NewGuid());
+            var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object, shelterRepositoryMock.Object);
 
             var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
 
