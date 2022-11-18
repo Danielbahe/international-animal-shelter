@@ -26,7 +26,7 @@ namespace Kindred.Guestbook.Api.Controllers
             var result = await mediator.Send(command);
 
             if(result.IsFailure) return BadRequest(result.Error);
-            return Ok(result);
+            return Ok();
         }
     }
 }

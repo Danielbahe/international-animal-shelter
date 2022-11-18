@@ -11,9 +11,10 @@ namespace Kindred.Guestbook.Domain.Commands.Users
         private readonly IUserRepository userRepository;
         private readonly ILogger logger;
 
-        public CreateUserCommandHandler(ILogger logger)
+        public CreateUserCommandHandler(ILogger logger, IUserRepository userRepository)
         {
             this.logger = logger;
+            this.userRepository = userRepository;
         }
 
         public async Task<Result> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)

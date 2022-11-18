@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Kindred.Guestbook.Api.Models.Shelter;
+using Kindred.Guestbook.Api.Models.User;
 using Kindred.Guestbook.Domain.Commands.Shelters;
 using Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter;
+using Kindred.Guestbook.Domain.Commands.Users;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.ValueObjects.Commands;
 
@@ -19,6 +21,13 @@ namespace Kindred.Guestbook.Api.Profiles
             CreateMap<DeleteShelterRequest, DeleteShelterCommandRequest>();
 
             CreateMap<Shelter, ShelterBasicInfoResponse>();
+        }
+    }
+    public class UsersProfile : Profile
+    {
+        public UsersProfile()
+        {
+            CreateMap<CreateUserRequest, CreateUserCommandRequest>();
         }
     }
 }

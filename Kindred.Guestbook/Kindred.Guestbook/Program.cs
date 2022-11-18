@@ -22,6 +22,7 @@ builder.Services.AddMediatR(AssembliesHelper.GetAllAssemblies());
 
 builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
 builder.Services.AddScoped<ISheltersRepository, SheltersRepository>();
+builder.Services.AddScoped<IUserRepository, UsersRepository>();
 
 builder.Services.AddAutoMapper(AssembliesHelper.GetAllAssemblies());
 
