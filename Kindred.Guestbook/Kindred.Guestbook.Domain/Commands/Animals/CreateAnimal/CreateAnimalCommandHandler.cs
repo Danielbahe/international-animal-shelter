@@ -29,14 +29,12 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
                 return Result.Failure<Animal>(shelterExists.Error);
             }
 
-            logger.Information("Hey: {@request}", request);
             var animal = Animal.Create(request);
             if (animal.IsFailure)
             {
                 logger.Warning("Animal can't be creaded: {e}", animal.Error);
                 return animal;
             }
-            logger.Information("Hey2: {@animal}", animal.Value);
 
             animalRepository.AddAnimal(animal.Value);
             await animalRepository.SaveAsync();
