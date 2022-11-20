@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal;
+using Kindred.Guestbook.Domain.ValueObjects;
 using Kindred.Infrastructure;
 
 namespace Kindred.Guestbook.Domain.Entities
@@ -11,6 +12,7 @@ namespace Kindred.Guestbook.Domain.Entities
         public string Species { get; private set; }
         public string Description { get; private set; }
         public Guid ShelterId { get; private set; }
+        public AnimalStatus Status { get; private set; }
 
         private Animal()
         {
@@ -25,6 +27,7 @@ namespace Kindred.Guestbook.Domain.Entities
                 .AddResult(animal.SetSpecies(command.Species))
                 .AddResult(animal.SetDescription(command.Description))
                 .AddResult(animal.SetShelter(command.ShelterId))
+                .AddResult(animal.SetStatus(command.Status))
                 .CombineIn(animal);
         }
 
@@ -34,6 +37,7 @@ namespace Kindred.Guestbook.Domain.Entities
                 .AddResult(SetName(command.Name))
                 .AddResult(SetSpecies(command.Species))
                 .AddResult(SetDescription(command.Description))
+                .AddResult(SetStatus(command.Status))
                 .CombineIn(this);
         }
 
@@ -69,5 +73,38 @@ namespace Kindred.Guestbook.Domain.Entities
 
             return Result.Success(this);
         }
-    }
+
+        private Result<Animal> SetStatus(AnimalStatusValue newStatus)
+        {
+            Result<AnimalStatus> status;
+
+            if (Status == null)
+            {
+                status = CreateAnimalStatus(newStatus);
+            }
+            else
+            {
+                status = Status.UpdateStatus(newStatus);
+            }
+            if (status.IsFailure)
+            {
+                return Result.Failure<Animal>(status.Error);
+            }
+
+            Status = status.Value;
+
+            return Result.Success(this);
+
+        }
+
+        private Result<AnimalStatus> CreateAnimalStatus(AnimalStatusValue newStatus)
+        {
+            return newStatus switch
+            {
+                AnimalStatusValue.Adoptable => AnimalStatus.CreateAdoptable(),
+                AnimalStatusValue.Lost => AnimalStatus.CreateLost(),
+                _ => AnimalStatus.CreateAdoptable(),
+            };
+        }
+    }    
 }

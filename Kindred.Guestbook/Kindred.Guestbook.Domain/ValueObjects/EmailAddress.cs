@@ -6,7 +6,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
 {
     public class EmailAddress : ValueObject
     {
-        public string Email { get; set; }
+        public string Email { get; private set; }
 
         private EmailAddress()
         {
@@ -14,10 +14,10 @@ namespace Kindred.Guestbook.Domain.ValueObjects
 
         public static Result<EmailAddress> Create(string email)
         {
-            var phoneNumber = new EmailAddress();
+            var emailAddress = new EmailAddress();
             return Constraints
-                .AddResult(phoneNumber.SetEmail(email))
-                .CombineIn(phoneNumber);
+                .AddResult(emailAddress.SetEmail(email))
+                .CombineIn(emailAddress);
         }
 
         private Result<EmailAddress> SetEmail(string email)

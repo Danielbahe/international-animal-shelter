@@ -28,7 +28,7 @@ namespace Kindred.Guestbook.Domain.Test.Entities
         public void CreateAnimalSuccessfully(string name, string species, string description, bool validShelter, bool isSuccess)
         {
             var shelterId = validShelter ? Guid.NewGuid() : Guid.Empty;
-            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, shelterId);
+            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, shelterId, ValueObjects.AnimalStatusValue.None);
 
             var animal = Animal.Create(createAnimalCommand);
 
@@ -38,13 +38,14 @@ namespace Kindred.Guestbook.Domain.Test.Entities
         [Fact]
         public void SetDataProperly()
         {
-            var createAnimalCommand = new CreateAnimalCommandRequest("Lua", "Cat", "Is Cute", Guid.NewGuid());
+            var createAnimalCommand = new CreateAnimalCommandRequest("Lua", "Cat", "Is Cute", Guid.NewGuid(), ValueObjects.AnimalStatusValue.None);
 
             var animal = Animal.Create(createAnimalCommand);
 
             Assert.Equal("Lua", animal.Value.Name);
             Assert.Equal("Cat", animal.Value.Species);
             Assert.Equal("Is Cute", animal.Value.Description);
+            Assert.True(ValueObjects.AnimalStatusValue.None == animal.Value.Status.Status);
             Assert.NotEqual(Guid.Empty, animal.Value.ShelterId);
         }
     }

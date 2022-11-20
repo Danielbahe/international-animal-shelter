@@ -17,7 +17,7 @@ namespace Kindred.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
             var shelterRepositoryMock = new Mock<ISheltersRepository>();
             var loggerMock = new Mock<ILogger>();
 
-            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, Guid.NewGuid());
+            var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, Guid.NewGuid(), ValueObjects.AnimalStatusValue.None);
             var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object, shelterRepositoryMock.Object);
 
             var result = await handler.Handle(createAnimalCommand, CancellationToken.None);

@@ -17,6 +17,7 @@ namespace Kindred.Guestbook.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ShelterEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AnimalEntityTypeConfiguration());
         }
     }
 }

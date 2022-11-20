@@ -6,5 +6,6 @@
         public string Species { get; set; }
         public string Description { get; set; }
         public Guid ShelterId { get; set; }
+        public int Status { get; set; }
     }
 }

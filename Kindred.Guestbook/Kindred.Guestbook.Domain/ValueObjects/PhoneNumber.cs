@@ -6,7 +6,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
 {
     public class PhoneNumber : ValueObject
     {
-        public string Number { get; set; }
+        public string Number { get; private set; }
         private PhoneNumber()
         {
         }
