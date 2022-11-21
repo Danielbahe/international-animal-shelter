@@ -9,7 +9,7 @@ namespace Kindred.Guestbook.Domain.Entities
     public class Animal : Entity
     {
         public string Name { get; private set; }
-        public string Species { get; private set; }
+        public Species Species { get; private set; }
         public string Description { get; private set; }
         public Guid ShelterId { get; private set; }
         public AnimalStatus Status { get; private set; }
@@ -55,14 +55,14 @@ namespace Kindred.Guestbook.Domain.Entities
             return Result.Success(this);
         }
 
-        private Result<Animal> SetSpecies(string species)
+        private Result<Animal> SetSpecies(Species species)
         {
-            if (string.IsNullOrEmpty(species))
+            if (species == Species.None || species == null)
             {
-                return Result.Failure<Animal>("Species cannot be empty");
+                return Result.Failure<Animal>("Species is mandatory");
             }
 
-            Species = species.Trim();
+            Species = species;
             return Result.Success(this);
         }
 

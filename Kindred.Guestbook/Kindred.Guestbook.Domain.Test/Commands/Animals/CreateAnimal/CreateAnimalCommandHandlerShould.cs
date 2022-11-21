@@ -9,9 +9,9 @@ namespace Kindred.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
     public class CreateAnimalCommandHandlerShould
     {
         [Theory]
-        [InlineData("Lua", "Cat", "Is Cute", true)]
-        [InlineData("", "", "", false)]
-        public async void ReturnSuccessfulResult(string name, string species, string description, bool isSuccess)
+        [InlineData("Lua", Species.Cat, "Is Cute", true)]
+        [InlineData("", Species.None, "", false)]
+        public async void ReturnSuccessfulResult(string name, Species species, string description, bool isSuccess)
         {
             var animalRepositoryMock = new Mock<IAnimalsRepository>();
             var shelterRepositoryMock = new Mock<ISheltersRepository>();

@@ -9,11 +9,11 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
     {
         public Guid Id { get; init; }
         public string Name { get; init; }
-        public string Species { get; init; }
+        public Species Species { get; init; }
         public string Description { get; init; }
         public AnimalStatusValue Status { get; init; }
 
-        public UpdateAnimalCommandRequest(Guid id, string name, string species, string description, AnimalStatusValue status)
+        public UpdateAnimalCommandRequest(Guid id, string name, Species species, string description, AnimalStatusValue status)
         {
             Id = id;
             Name = name;
