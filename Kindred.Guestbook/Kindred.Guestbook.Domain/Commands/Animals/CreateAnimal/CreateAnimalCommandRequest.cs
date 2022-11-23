@@ -1,11 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.ValueObjects;
+using Kindred.Infrastructure;
 using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
 {
-    public record CreateAnimalCommandRequest : IRequest<Result<Animal>>
+    public record CreateAnimalCommandRequest : IRequest<Response<Result<Animal>>>
     {
         public string Name { get; init; }
         public Species Species { get; init; }

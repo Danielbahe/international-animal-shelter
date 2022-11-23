@@ -23,19 +23,12 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAnimal([FromBody] CreateAnimalRequest request)
+        public async Task<IResult> CreateAnimal([FromBody] CreateAnimalRequest request)
         {
             var command = mapper.Map<CreateAnimalCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse(nameof(CreateAnimal));
         }
 
         [HttpGet]
