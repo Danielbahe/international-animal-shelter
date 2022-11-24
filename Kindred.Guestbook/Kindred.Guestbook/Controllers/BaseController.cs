@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Kindred.Infrastructure;
+using Kindred.Guestbook.Domain.Entities;
 
 namespace Kindred.Guestbook.Api.Controllers
 {
@@ -10,10 +11,10 @@ namespace Kindred.Guestbook.Api.Controllers
             return response.ResponseCode switch
             {
                 ResponseCode.Success => value == null ? Ok(response.Result.Value) : Ok(value),
-                ResponseCode.Created => Created(uri, null),
+                ResponseCode.Created => Created(uri, value),
                 ResponseCode.ValidationError => BadRequest(response.Result.Error),
-                ResponseCode.NotFound => NotFound(),
-                _ => StatusCode(500),
+                ResponseCode.NotFound => NotFound(response.Result.Error),
+                _ => StatusCode(500, response.Result.Error),
             };
         }
 
@@ -24,8 +25,8 @@ namespace Kindred.Guestbook.Api.Controllers
                 ResponseCode.Success => Ok(),
                 ResponseCode.Created => Created(uri, null),
                 ResponseCode.ValidationError => BadRequest(response.Result.Error),
-                ResponseCode.NotFound => NotFound(),
-                _ => StatusCode(500),
+                ResponseCode.NotFound => NotFound(response.Result.Error),
+                _ => StatusCode(500, response.Result.Error),
             };
         }
     }

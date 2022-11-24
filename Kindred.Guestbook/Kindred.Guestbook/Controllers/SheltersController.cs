@@ -27,7 +27,7 @@ namespace Kindred.Guestbook.Api.Controllers
             var command = mapper.Map<CreateShelterCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return MapToHttpResponse(response, nameof(CreateShelter));
+            return MapToHttpResponse(response, nameof(CreateShelter), response.Result.Value.Id);
         }
 
         [HttpGet]

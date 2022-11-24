@@ -27,7 +27,7 @@ namespace Kindred.Guestbook.Api.Controllers
         {
             var command = mapper.Map<CreateAnimalCommandRequest>(request);
             var response = await mediator.Send(command);
-            return MapToHttpResponse(response, nameof(CreateAnimal));
+            return MapToHttpResponse(response, nameof(CreateAnimal), response.Result.Value.Id);
         }
 
         [HttpGet]

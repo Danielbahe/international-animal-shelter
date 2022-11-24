@@ -25,7 +25,7 @@ namespace Kindred.Guestbook.Api.Controllers
             var command = mapper.Map<CreateUserCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return MapToHttpResponse(response, nameof(CreateUser));
+            return MapToHttpResponse(response, nameof(CreateUser), response.Result.Value.Id);
         }
     }
 }

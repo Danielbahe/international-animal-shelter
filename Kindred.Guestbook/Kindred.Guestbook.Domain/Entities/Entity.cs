@@ -1,6 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-
-namespace Kindred.Guestbook.Domain.Entities
+﻿namespace Kindred.Guestbook.Domain.Entities
 {
     public abstract class Entity
     {

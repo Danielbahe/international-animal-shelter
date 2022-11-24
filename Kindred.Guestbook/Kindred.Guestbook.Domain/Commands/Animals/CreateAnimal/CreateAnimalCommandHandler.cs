@@ -26,6 +26,7 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
 
             if (shelterExists.IsFailure)
             {
+                logger.Warning("Animal can't be creaded: {e}", shelterExists.Error);
                 var result = Result.Failure<Animal>(shelterExists.Error);
                 return result.ToResponse(ResponseCode.ValidationError);
             }
@@ -34,13 +35,11 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
             if (animal.IsFailure)
             {
                 logger.Warning("Animal can't be creaded: {e}", animal.Error);
-                logger.Information("{a}", animal);
                 return animal.ToResponse(ResponseCode.ValidationError);
             }
 
             animalRepository.AddAnimal(animal.Value);
             await animalRepository.SaveAsync();
-            logger.Information("{a}", animal);
 
             return animal.ToResponse(ResponseCode.Created);
         }
