@@ -1,12 +1,13 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.Repositories;
+using Kindred.Infrastructure;
 using MediatR;
 using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
 {
-    internal class UpdateAnimalCommandHandler : IRequestHandler<UpdateAnimalCommandRequest, Result<Animal>>
+    internal class UpdateAnimalCommandHandler : IRequestHandler<UpdateAnimalCommandRequest, Response<Result<Animal>>>
     {
         private readonly IAnimalsRepository animalRepository;
         private readonly ILogger logger;
@@ -17,21 +18,18 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
             this.logger = logger;
         }
 
-        public async Task<Result<Animal>> Handle(UpdateAnimalCommandRequest command, CancellationToken cancellationToken)
+        public async Task<Response<Result<Animal>>> Handle(UpdateAnimalCommandRequest command, CancellationToken cancellationToken)
         {
-            var animalToUpdate = await GetAnimalByIdAsync(command.Id);
-            return await UpdateAnimalAsync(command, animalToUpdate);
-        }
-
-        private async Task<Result<Animal>> GetAnimalByIdAsync(Guid id)
-        {
-            var animalToUpdate = await animalRepository.GetByIdAsync(id);
+            var animalToUpdate = await animalRepository.GetByIdAsync(command.Id);
             if (animalToUpdate.IsFailure)
             {
                 logger.Warning("Animal can't be updated: {e}", animalToUpdate.Error);
+                return animalToUpdate.ToResponse(ResponseCode.NotFound);
             }
 
-            return animalToUpdate;
+            var result = await UpdateAnimalAsync(command, animalToUpdate);
+
+            return result.ToResponse(ResponseCode.Success);
         }
 
         private async Task<Result<Animal>> UpdateAnimalAsync(UpdateAnimalCommandRequest command, Result<Animal> animalToUpdate)

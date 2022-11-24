@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Kindred.Guestbook.Domain.Queries.Animals;
 using Kindred.Guestbook.Api.Models.Animal;
+using Kindred.Infrastructure;
 
 namespace Kindred.Guestbook.Api.Controllers
 {
@@ -32,46 +33,29 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAnimals()
+        public async Task<IResult> GetAllAnimals()
         {
-            var query = new GetAllAnimalsQuery();
-            var result = await mediator.Send(query);
+            var result = await mediator.Send(new GetAllAnimalsQuery());
 
-            var response = mapper.Map<IEnumerable<AnimalBasicInfoResponse>>(result);
-
-            return Ok(response);
+            return Results.Ok(mapper.Map<IEnumerable<AnimalBasicInfoResponse>>(result));            
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
+        public async Task<IResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
         {
             var command = mapper.Map<UpdateAnimalCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse(nameof(UpdateAnimal));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
+        public async Task<IResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
         {
             var command = mapper.Map<DeleteAnimalCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse(nameof(DeleteAnimal));
         }
     }
 }
