@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
-    public class UpdateShelterCommandRequest : IRequest<Response<Result<Shelter>>>
+    public class UpdateShelterCommandRequest : IRequest<Response<Shelter>>
     {
         public Guid Id { get; init; }
         public string Name { get; init; }

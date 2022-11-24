@@ -7,7 +7,7 @@ using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter
 {
-    public class CreateShelterCommandHandler : IRequestHandler<CreateShelterCommandRequest, Response<Result<Shelter>>>
+    public class CreateShelterCommandHandler : IRequestHandler<CreateShelterCommandRequest, Response<Shelter>>
     {
         private readonly ISheltersRepository shelterRepository;
         private readonly ILogger logger;
@@ -18,7 +18,7 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter
             this.logger = logger;
         }
 
-        public async Task<Response<Result<Shelter>>> Handle(CreateShelterCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Response<Shelter>> Handle(CreateShelterCommandRequest request, CancellationToken cancellationToken)
         {
             var shelter = Shelter.Create(request);
             if (shelter.IsFailure)

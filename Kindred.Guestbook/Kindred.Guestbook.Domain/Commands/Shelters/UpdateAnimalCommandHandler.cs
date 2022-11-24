@@ -7,7 +7,7 @@ using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
-    public class UpdateAnimalCommandHandler : IRequestHandler<UpdateShelterCommandRequest, Response<Result<Shelter>>>
+    public class UpdateAnimalCommandHandler : IRequestHandler<UpdateShelterCommandRequest, Response<Shelter>>
     {
         private readonly ISheltersRepository shelterRepository;
         private readonly ILogger logger;
@@ -18,7 +18,7 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters
             this.logger = logger;
         }
 
-        public async Task<Response<Result<Shelter>>> Handle(UpdateShelterCommandRequest command, CancellationToken cancellationToken)
+        public async Task<Response<Shelter>> Handle(UpdateShelterCommandRequest command, CancellationToken cancellationToken)
         {
             var shelterToUpdate = await shelterRepository.GetByIdAsync(command.Id);
             if (shelterToUpdate.IsFailure)
@@ -30,7 +30,7 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters
             return await UpdateAnimalAsync(command, shelterToUpdate);
         }
 
-        private async Task<Response<Result<Shelter>>> UpdateAnimalAsync(UpdateShelterCommandRequest command, Result<Shelter> shelterToUpdate)
+        private async Task<Response<Shelter>> UpdateAnimalAsync(UpdateShelterCommandRequest command, Result<Shelter> shelterToUpdate)
         {
             var result = shelterToUpdate.Value.Update(command);
             if (result.IsFailure)

@@ -4,7 +4,7 @@ namespace Kindred.Infrastructure
 {
     public static class ResultExtensions
     {
-        public static Response<T> ToResponse<T>(this T result, ResponseCode code) where T : IResult
+        public static Response<T> ToResponse<T>(this Result<T> result, ResponseCode code)
         {
             return Response<T>.Create(result, code);
         }

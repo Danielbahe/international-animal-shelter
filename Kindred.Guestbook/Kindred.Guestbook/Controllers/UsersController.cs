@@ -20,13 +20,12 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+        public async Task<IResult> CreateUser([FromBody] CreateUserRequest request)
         {
             var command = mapper.Map<CreateUserCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if(result.IsFailure) return BadRequest(result.Error);
-            return Ok();
+            return response.ToHttpResponse(nameof(CreateUser));
         }
     }
 }

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
 {
-    public record UpdateAnimalCommandRequest : IRequest<Response<Result<Animal>>>
+    public record UpdateAnimalCommandRequest : IRequest<Response<Animal>>
     {
         public Guid Id { get; init; }
         public string Name { get; init; }

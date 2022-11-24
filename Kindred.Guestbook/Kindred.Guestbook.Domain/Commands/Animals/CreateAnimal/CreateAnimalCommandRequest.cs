@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
 {
-    public record CreateAnimalCommandRequest : IRequest<Response<Result<Animal>>>
+    public record CreateAnimalCommandRequest : IRequest<Response<Animal>>
     {
         public string Name { get; init; }
         public Species Species { get; init; }

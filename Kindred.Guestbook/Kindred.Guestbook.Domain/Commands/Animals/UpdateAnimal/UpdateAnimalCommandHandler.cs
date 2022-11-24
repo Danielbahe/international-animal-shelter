@@ -7,7 +7,7 @@ using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
 {
-    internal class UpdateAnimalCommandHandler : IRequestHandler<UpdateAnimalCommandRequest, Response<Result<Animal>>>
+    internal class UpdateAnimalCommandHandler : IRequestHandler<UpdateAnimalCommandRequest, Response<Animal>>
     {
         private readonly IAnimalsRepository animalRepository;
         private readonly ILogger logger;
@@ -18,7 +18,7 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
             this.logger = logger;
         }
 
-        public async Task<Response<Result<Animal>>> Handle(UpdateAnimalCommandRequest command, CancellationToken cancellationToken)
+        public async Task<Response<Animal>> Handle(UpdateAnimalCommandRequest command, CancellationToken cancellationToken)
         {
             var animalToUpdate = await animalRepository.GetByIdAsync(command.Id);
             if (animalToUpdate.IsFailure)
