@@ -1,11 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.ValueObjects.Commands;
+using Kindred.Infrastructure;
 using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter
 {
-    public record CreateShelterCommandRequest : IRequest<Result<Shelter>>
+    public record CreateShelterCommandRequest : IRequest<Response<Result<Shelter>>>
     {
         public string Name { get; init; }
         public CreateAddressCommandRequest Address { get; init; }

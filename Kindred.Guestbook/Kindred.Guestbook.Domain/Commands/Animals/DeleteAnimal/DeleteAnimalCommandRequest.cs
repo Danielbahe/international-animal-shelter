@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal
 {
-    public record DeleteAnimalCommandRequest : IRequest<Response<Result>>
+    public record DeleteAnimalCommandRequest : IRequest<Response>
     {
         public Guid Id { get; init; }
 

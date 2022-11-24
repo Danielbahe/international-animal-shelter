@@ -1,12 +1,13 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.Repositories;
+using Kindred.Infrastructure;
 using MediatR;
 using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
-    internal class DeleteShelterCommandHandler : IRequestHandler<DeleteShelterCommandRequest, Result>
+    internal class DeleteShelterCommandHandler : IRequestHandler<DeleteShelterCommandRequest, Response>
     {
         private readonly ISheltersRepository shelterRepository;
         private readonly ILogger logger;
@@ -17,23 +18,18 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters
             this.logger = logger;
         }
 
-        public async Task<Result> Handle(DeleteShelterCommandRequest command, CancellationToken cancellationToken)
+        public async Task<Response> Handle(DeleteShelterCommandRequest command, CancellationToken cancellationToken)
         {
-            var shelterToDelete = await GetShelterByIdAsync(command.Id);
-            await DeleteShelterAsync(shelterToDelete.Value);
-
-            return Result.Success();
-        }
-
-        private async Task<Result<Shelter>> GetShelterByIdAsync(Guid id)
-        {
-            var shelterToDelete = await shelterRepository.GetByIdAsync(id);
+            var shelterToDelete = await shelterRepository.GetByIdAsync(command.Id);
             if (shelterToDelete.IsFailure)
             {
                 logger.Warning("Shelter can't be deleted: {e}", shelterToDelete.Error);
+                return Result.Failure(shelterToDelete.Error).ToResponse(ResponseCode.NotFound);
             }
 
-            return shelterToDelete;
+            await DeleteShelterAsync(shelterToDelete.Value);
+
+            return Result.Success().ToResponse(ResponseCode.Success);
         }
 
         private async Task DeleteShelterAsync(Shelter ShelterToDelete)

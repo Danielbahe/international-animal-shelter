@@ -16,7 +16,7 @@ namespace Kindred.Infrastructure
         public Result<T> Result { get; private set; }
         public ResponseCode ResponseCode { get; private set; }
 
-        public static Response<T> Create<T>(Result<T> result, ResponseCode code)
+        public static Response<T> Create(Result<T> result, ResponseCode code)
         {
             var response = new Response<T>
             {

@@ -1,11 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
 using Kindred.Guestbook.Domain.Entities;
 using Kindred.Guestbook.Domain.ValueObjects.Commands;
+using Kindred.Infrastructure;
 using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
-    public class UpdateShelterCommandRequest : IRequest<Result<Shelter>>
+    public class UpdateShelterCommandRequest : IRequest<Response<Result<Shelter>>>
     {
         public Guid Id { get; init; }
         public string Name { get; init; }

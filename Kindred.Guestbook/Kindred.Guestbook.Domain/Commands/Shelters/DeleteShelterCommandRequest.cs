@@ -1,9 +1,9 @@
-﻿using CSharpFunctionalExtensions;
+﻿using Kindred.Infrastructure;
 using MediatR;
 
 namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
-    public record DeleteShelterCommandRequest : IRequest<Result>
+    public record DeleteShelterCommandRequest : IRequest<Response>
     {
         public Guid Id { get; init; }
 

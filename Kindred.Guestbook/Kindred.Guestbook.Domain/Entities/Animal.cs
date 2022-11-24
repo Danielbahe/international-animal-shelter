@@ -57,7 +57,7 @@ namespace Kindred.Guestbook.Domain.Entities
 
         private Result<Animal> SetSpecies(Species species)
         {
-            if (species == Species.None || species == null)
+            if (species == Species.None)
             {
                 return Result.Failure<Animal>("Species is mandatory");
             }
@@ -97,7 +97,7 @@ namespace Kindred.Guestbook.Domain.Entities
 
         }
 
-        private Result<AnimalStatus> CreateAnimalStatus(AnimalStatusValue newStatus)
+        private static Result<AnimalStatus> CreateAnimalStatus(AnimalStatusValue newStatus)
         {
             return newStatus switch
             {

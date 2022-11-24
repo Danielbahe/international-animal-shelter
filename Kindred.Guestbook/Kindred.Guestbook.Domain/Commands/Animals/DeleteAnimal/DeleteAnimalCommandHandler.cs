@@ -7,7 +7,7 @@ using Serilog;
 
 namespace Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal
 {
-    internal class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommandRequest, Response<Result>>
+    internal class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommandRequest, Response>
     {
         private readonly IAnimalsRepository animalRepository;
         private readonly ILogger logger;
@@ -18,7 +18,7 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal
             this.logger = logger;
         }
 
-        public async Task<Response<Result>> Handle(DeleteAnimalCommandRequest command, CancellationToken cancellationToken)
+        public async Task<Response> Handle(DeleteAnimalCommandRequest command, CancellationToken cancellationToken)
         {
             var animalToDelete = await animalRepository.GetByIdAsync(command.Id);
             if (animalToDelete.IsFailure)

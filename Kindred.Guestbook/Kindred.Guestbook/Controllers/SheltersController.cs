@@ -22,62 +22,41 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateShelter([FromBody] CreateShelterRequest request)
+        public async Task<IResult> CreateShelter([FromBody] CreateShelterRequest request)
         {
             var command = mapper.Map<CreateShelterCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Created("", result.Value);
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse(nameof(CreateShelter));
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllShelters()
+        public async Task<IResult> GetAllShelters()
         {
             var query = new GetAllSheltersQueryRequest();
             var result = await mediator.Send(query);
 
             var response = mapper.Map<IEnumerable<ShelterBasicInfoResponse>>(result);
 
-            return Ok(response);
+            return Results.Ok(response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateShelter([FromBody] UpdateShelterRequest request)
+        public async Task<IResult> UpdateShelter([FromBody] UpdateShelterRequest request)
         {
             var command = mapper.Map<UpdateShelterCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteShelter([FromBody] DeleteShelterRequest request)
+        public async Task<IResult> DeleteShelter([FromBody] DeleteShelterRequest request)
         {
             var command = mapper.Map<DeleteShelterCommandRequest>(request);
-            var result = await mediator.Send(command);
+            var response = await mediator.Send(command);
 
-            if (result.IsSuccess)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            return response.ToHttpResponse();
         }
     }
 }
