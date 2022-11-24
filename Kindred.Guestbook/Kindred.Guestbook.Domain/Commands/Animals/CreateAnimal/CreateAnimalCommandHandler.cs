@@ -26,11 +26,8 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
 
             if (shelterExists.IsFailure)
             {
-                logger.Warning("Animal can't be creaded: {e}", shelterExists.Error);
                 var result = Result.Failure<Animal>(shelterExists.Error);
-                logger.Information("{e}", shelterExists);
-
-                var a =  result.ToResponse(ResponseCode.ValidationError);
+                return result.ToResponse(ResponseCode.ValidationError);
             }
 
             var animal = Animal.Create(request);

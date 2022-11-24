@@ -10,7 +10,7 @@ namespace Kindred.Guestbook.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SheltersController : ControllerBase
+    public class SheltersController : BaseController
     {
         private readonly IMediator mediator;
         private readonly IMapper mapper;
@@ -22,41 +22,41 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> CreateShelter([FromBody] CreateShelterRequest request)
+        public async Task<IActionResult> CreateShelter([FromBody] CreateShelterRequest request)
         {
             var command = mapper.Map<CreateShelterCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse(nameof(CreateShelter));
+            return MapToHttpResponse(response, nameof(CreateShelter));
         }
 
         [HttpGet]
-        public async Task<IResult> GetAllShelters()
+        public async Task<IActionResult> GetAllShelters()
         {
             var query = new GetAllSheltersQueryRequest();
             var result = await mediator.Send(query);
 
             var response = mapper.Map<IEnumerable<ShelterBasicInfoResponse>>(result);
 
-            return Results.Ok(response);
+            return Ok(response);
         }
 
         [HttpPut]
-        public async Task<IResult> UpdateShelter([FromBody] UpdateShelterRequest request)
+        public async Task<IActionResult> UpdateShelter([FromBody] UpdateShelterRequest request)
         {
             var command = mapper.Map<UpdateShelterCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse();
+            return MapToHttpResponse(response);
         }
 
         [HttpDelete]
-        public async Task<IResult> DeleteShelter([FromBody] DeleteShelterRequest request)
+        public async Task<IActionResult> DeleteShelter([FromBody] DeleteShelterRequest request)
         {
             var command = mapper.Map<DeleteShelterCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse();
+            return MapToHttpResponse(response);
         }
     }
 }

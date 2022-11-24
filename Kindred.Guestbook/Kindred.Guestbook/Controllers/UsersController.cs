@@ -8,7 +8,7 @@ namespace Kindred.Guestbook.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private readonly IMediator mediator;
         private readonly IMapper mapper;
@@ -20,12 +20,12 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> CreateUser([FromBody] CreateUserRequest request)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
         {
             var command = mapper.Map<CreateUserCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse(nameof(CreateUser));
+            return MapToHttpResponse(response, nameof(CreateUser));
         }
     }
 }

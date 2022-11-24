@@ -6,13 +6,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Kindred.Guestbook.Domain.Queries.Animals;
 using Kindred.Guestbook.Api.Models.Animal;
-using Kindred.Infrastructure;
 
 namespace Kindred.Guestbook.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AnimalsController : ControllerBase
+    public class AnimalsController : BaseController
     {
         private readonly IMediator mediator;
         private readonly IMapper mapper;
@@ -24,38 +23,37 @@ namespace Kindred.Guestbook.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> CreateAnimal([FromBody] CreateAnimalRequest request)
+        public async Task<IActionResult> CreateAnimal([FromBody] CreateAnimalRequest request)
         {
             var command = mapper.Map<CreateAnimalCommandRequest>(request);
             var response = await mediator.Send(command);
-
-            return response.ToHttpResponse(nameof(CreateAnimal));
+            return MapToHttpResponse(response, nameof(CreateAnimal));
         }
 
         [HttpGet]
-        public async Task<IResult> GetAllAnimals()
+        public async Task<IActionResult> GetAllAnimals()
         {
-            var result = await mediator.Send(new GetAllAnimalsQuery());
+            var animals = await mediator.Send(new GetAllAnimalsQuery());
 
-            return Results.Ok(mapper.Map<IEnumerable<AnimalBasicInfoResponse>>(result));            
+            return Ok(mapper.Map<IEnumerable<AnimalBasicInfoResponse>>(animals));
         }
 
         [HttpPut]
-        public async Task<IResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
+        public async Task<IActionResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
         {
             var command = mapper.Map<UpdateAnimalCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse(nameof(UpdateAnimal));
+            return MapToHttpResponse(response);
         }
 
         [HttpDelete]
-        public async Task<IResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
+        public async Task<IActionResult> DeleteAnimal([FromBody] DeleteAnimalRequest request)
         {
             var command = mapper.Map<DeleteAnimalCommandRequest>(request);
             var response = await mediator.Send(command);
 
-            return response.ToHttpResponse(nameof(DeleteAnimal));
+            return MapToHttpResponse(response);
         }
     }
 }
