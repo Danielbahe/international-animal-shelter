@@ -20,8 +20,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(AssembliesHelper.GetAllAssemblies());
 
-builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
-builder.Services.AddScoped<ISheltersRepository, SheltersRepository>();
+builder.Services.AddScoped<IAnimalRepository, AnimalsRepository>();
+builder.Services.AddScoped<IShelterRepository, SheltersRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 
 builder.Services.AddAutoMapper(AssembliesHelper.GetAllAssemblies());

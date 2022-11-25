@@ -9,10 +9,10 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.DeleteAnimal
 {
     internal class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommandRequest, Response>
     {
-        private readonly IAnimalsRepository animalRepository;
+        private readonly IAnimalRepository animalRepository;
         private readonly ILogger logger;
 
-        public DeleteAnimalCommandHandler(IAnimalsRepository animalRepository, ILogger logger)
+        public DeleteAnimalCommandHandler(IAnimalRepository animalRepository, ILogger logger)
         {
             this.animalRepository = animalRepository;
             this.logger = logger;

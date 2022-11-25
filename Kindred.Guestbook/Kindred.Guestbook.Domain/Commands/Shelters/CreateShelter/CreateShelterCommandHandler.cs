@@ -9,10 +9,10 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters.CreateShelter
 {
     public class CreateShelterCommandHandler : IRequestHandler<CreateShelterCommandRequest, Response<Shelter>>
     {
-        private readonly ISheltersRepository shelterRepository;
+        private readonly IShelterRepository shelterRepository;
         private readonly ILogger logger;
 
-        public CreateShelterCommandHandler(ISheltersRepository shelterRepository, ILogger logger)
+        public CreateShelterCommandHandler(IShelterRepository shelterRepository, ILogger logger)
         {
             this.shelterRepository = shelterRepository;
             this.logger = logger;

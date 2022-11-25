@@ -9,10 +9,10 @@ namespace Kindred.Guestbook.Domain.Commands.Shelters
 {
     internal class DeleteShelterCommandHandler : IRequestHandler<DeleteShelterCommandRequest, Response>
     {
-        private readonly ISheltersRepository shelterRepository;
+        private readonly IShelterRepository shelterRepository;
         private readonly ILogger logger;
 
-        public DeleteShelterCommandHandler(ISheltersRepository shelterRepository, ILogger logger)
+        public DeleteShelterCommandHandler(IShelterRepository shelterRepository, ILogger logger)
         {
             this.shelterRepository = shelterRepository;
             this.logger = logger;

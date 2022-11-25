@@ -9,10 +9,10 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal
 {
     internal class UpdateAnimalCommandHandler : IRequestHandler<UpdateAnimalCommandRequest, Response<Animal>>
     {
-        private readonly IAnimalsRepository animalRepository;
+        private readonly IAnimalRepository animalRepository;
         private readonly ILogger logger;
 
-        public UpdateAnimalCommandHandler(IAnimalsRepository animalRepository, ILogger logger)
+        public UpdateAnimalCommandHandler(IAnimalRepository animalRepository, ILogger logger)
         {
             this.animalRepository = animalRepository;
             this.logger = logger;

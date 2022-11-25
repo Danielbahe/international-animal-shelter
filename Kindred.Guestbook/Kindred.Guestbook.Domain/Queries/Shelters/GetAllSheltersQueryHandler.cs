@@ -7,10 +7,10 @@ namespace Kindred.Guestbook.Domain.Queries.Shelters
 {
     internal class GetAllSheltersQueryHandler : IRequestHandler<GetAllSheltersQueryRequest, IEnumerable<Shelter>>
     {
-        private readonly ISheltersRepository shelterRepository;
+        private readonly IShelterRepository shelterRepository;
         private readonly ILogger logger;
 
-        public GetAllSheltersQueryHandler(ISheltersRepository shelterRepository, ILogger logger)
+        public GetAllSheltersQueryHandler(IShelterRepository shelterRepository, ILogger logger)
         {
             this.shelterRepository = shelterRepository;
             this.logger = logger;

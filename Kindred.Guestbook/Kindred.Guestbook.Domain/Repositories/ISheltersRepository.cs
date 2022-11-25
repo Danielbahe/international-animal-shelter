@@ -3,7 +3,7 @@ using Kindred.Guestbook.Domain.Entities;
 
 namespace Kindred.Guestbook.Domain.Repositories
 {
-    public interface ISheltersRepository : IRepository
+    public interface IShelterRepository : IRepository
     {
         void AddShelter(Shelter animal);
         Task<Result<Shelter>> GetByIdAsync(Guid id);

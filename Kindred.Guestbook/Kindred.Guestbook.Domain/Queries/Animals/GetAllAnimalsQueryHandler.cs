@@ -7,10 +7,10 @@ namespace Kindred.Guestbook.Domain.Queries.Animals
 {
     internal class GetAllAnimalsQueryHandler : IRequestHandler<GetAllAnimalsQuery, IEnumerable<Animal>>
     {
-        private readonly IAnimalsRepository animalRepository;
+        private readonly IAnimalRepository animalRepository;
         private readonly ILogger logger;
 
-        public GetAllAnimalsQueryHandler(IAnimalsRepository animalRepository, ILogger logger)
+        public GetAllAnimalsQueryHandler(IAnimalRepository animalRepository, ILogger logger)
         {
             this.animalRepository = animalRepository;
             this.logger = logger;

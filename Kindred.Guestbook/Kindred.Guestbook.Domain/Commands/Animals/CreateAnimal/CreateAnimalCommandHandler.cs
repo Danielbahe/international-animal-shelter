@@ -9,11 +9,11 @@ namespace Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal
 {
     public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommandRequest, Response<Animal>>
     {
-        private readonly IAnimalsRepository animalRepository;
-        private readonly ISheltersRepository shelterRepository;
+        private readonly IAnimalRepository animalRepository;
+        private readonly IShelterRepository shelterRepository;
         private readonly ILogger logger;
 
-        public CreateAnimalCommandHandler(IAnimalsRepository animalRepository, ILogger logger, ISheltersRepository shelterRepository)
+        public CreateAnimalCommandHandler(IAnimalRepository animalRepository, ILogger logger, IShelterRepository shelterRepository)
         {
             this.animalRepository = animalRepository;
             this.logger = logger;

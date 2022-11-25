@@ -13,8 +13,8 @@ namespace Kindred.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
         [InlineData("", Species.None, "", false)]
         public async void ReturnSuccessfulResult(string name, Species species, string description, bool isSuccess)
         {
-            var animalRepositoryMock = new Mock<IAnimalsRepository>();
-            var shelterRepositoryMock = new Mock<ISheltersRepository>();
+            var animalRepositoryMock = new Mock<IAnimalRepository>();
+            var shelterRepositoryMock = new Mock<IShelterRepository>();
             var loggerMock = new Mock<ILogger>();
 
             var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, Guid.NewGuid(), ValueObjects.AnimalStatusValue.None);

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kindred.Guestbook.DataAccess
 {
-    public class SheltersRepository : ISheltersRepository
+    public class SheltersRepository : IShelterRepository
     {
         private GuestbookContext Context { get; set; }
 

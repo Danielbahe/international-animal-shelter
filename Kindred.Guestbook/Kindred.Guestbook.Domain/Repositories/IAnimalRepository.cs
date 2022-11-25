@@ -3,7 +3,7 @@ using Kindred.Guestbook.Domain.Entities;
 
 namespace Kindred.Guestbook.Domain.Repositories
 {
-    public interface IAnimalsRepository : IRepository
+    public interface IAnimalRepository : IRepository
     {
         void AddAnimal(Animal animal);
         Task<IEnumerable<Animal>> GetAllAsync();
