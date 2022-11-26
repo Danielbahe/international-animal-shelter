@@ -22,8 +22,8 @@ namespace Kindred.Guestbook.Domain.Test.Entities
         [InlineData("Lua", null, "Is cute", true, false)]
         [InlineData(null, null, "Is cute", true, false)]
         [InlineData("Lua", null, null, true, false)]
-        [InlineData("Lua", Species.Cat, null, true, false)]
-        [InlineData("Lua", Species.Cat, "Is cute", false, true)]
+        [InlineData("Lua", Species.Cat, null, true, true)]
+        [InlineData("Lua", Species.Cat, "Is cute", false, false)]
 
         public void CreateAnimalSuccessfully(string name, Species species, string description, bool validShelter, bool isSuccess)
         {
@@ -38,14 +38,14 @@ namespace Kindred.Guestbook.Domain.Test.Entities
         [Fact]
         public void SetDataProperly()
         {
-            var createAnimalCommand = new CreateAnimalCommandRequest("Lua", Species.Cat, "Is Cute", Guid.NewGuid(), ValueObjects.AnimalStatusValue.None);
+            var createAnimalCommand = new CreateAnimalCommandRequest("Lua", Species.Cat, "Is Cute", Guid.NewGuid(), ValueObjects.AnimalStatusValue.Lost);
 
             var animal = Animal.Create(createAnimalCommand);
 
             Assert.Equal("Lua", animal.Value.Name);
             Assert.Equal(Species.Cat, animal.Value.Species);
             Assert.Equal("Is Cute", animal.Value.Description);
-            Assert.True(ValueObjects.AnimalStatusValue.None == animal.Value.Status.Status);
+            Assert.True(ValueObjects.AnimalStatusValue.Lost == animal.Value.Status.Status);
             Assert.NotEqual(Guid.Empty, animal.Value.ShelterId);
         }
     }

@@ -20,9 +20,9 @@ namespace Kindred.Guestbook.Domain.Test.Commands.Animals.CreateAnimal
             var createAnimalCommand = new CreateAnimalCommandRequest(name, species, description, Guid.NewGuid(), ValueObjects.AnimalStatusValue.None);
             var handler = new CreateAnimalCommandHandler(animalRepositoryMock.Object, loggerMock.Object, shelterRepositoryMock.Object);
 
-            var result = await handler.Handle(createAnimalCommand, CancellationToken.None);
+            var response = await handler.Handle(createAnimalCommand, CancellationToken.None);
 
-            Assert.Equal(isSuccess, result.IsSuccess);
+            Assert.Equal(isSuccess, response.Result.IsSuccess);
         }
     }
 }
