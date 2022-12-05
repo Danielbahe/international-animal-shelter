@@ -33,7 +33,10 @@ namespace Kindred.Guestbook.Domain.Entities
 
         private Result<Shelter> SetName(string name)
         {
-            name = string.IsNullOrEmpty(name) ? string.Empty : name;
+            if (string.IsNullOrEmpty(name))
+            {
+                return Result.Failure<Shelter>("Name can't be empty");
+            }
             Name = name.Trim();
             return Result.Success(this);
         }
@@ -76,12 +79,12 @@ namespace Kindred.Guestbook.Domain.Entities
 
         public Result<Shelter> Update(UpdateShelterCommandRequest command)
         {
-             return Constraints
-                .AddResult(SetName(command.Name))
-                .AddResultIf(!PhoneNumber.Equals(command.PhoneNumber), SetPhoneNumber(command.PhoneNumber))
-                .AddResultIf(!Email.Equals(command.Email), SetEmail(command.Email))
-                .AddResultIf(!Address.Equals(command.Address), SetAddress(command.Address))
-                .CombineIn(this);
+            return Constraints
+               .AddResult(SetName(command.Name))
+               .AddResultIf(!PhoneNumber.Equals(command.PhoneNumber), SetPhoneNumber(command.PhoneNumber))
+               .AddResultIf(!Email.Equals(command.Email), SetEmail(command.Email))
+               .AddResultIf(!Address.Equals(command.Address), SetAddress(command.Address))
+               .CombineIn(this);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
             city = city.Trim();
             if (string.IsNullOrEmpty(city))
             {
-                return Result.Failure<Address>("Street can't be empty");
+                return Result.Failure<Address>("City can't be empty");
             }
 
             City = city;
@@ -57,7 +57,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
             zipCode = zipCode.Trim();
             if (string.IsNullOrEmpty(zipCode))
             {
-                return Result.Failure<Address>("Street can't be empty");
+                return Result.Failure<Address>("ZipCode can't be empty");
             }
 
             ZipCode = zipCode;
@@ -69,7 +69,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
             country = country.Trim();
             if (string.IsNullOrEmpty(country))
             {
-                return Result.Failure<Address>("Street can't be empty");
+                return Result.Failure<Address>("Country can't be empty");
             }
 
             Country = country;
@@ -81,7 +81,7 @@ namespace Kindred.Guestbook.Domain.ValueObjects
             state = state.Trim();
             if (string.IsNullOrEmpty(state))
             {
-                return Result.Failure<Address>("Street can't be empty");
+                return Result.Failure<Address>("State can't be empty");
             }
 
             State = state;

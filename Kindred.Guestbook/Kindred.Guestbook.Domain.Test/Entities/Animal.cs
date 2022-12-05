@@ -1,7 +1,6 @@
 using Kindred.Guestbook.Domain.Commands.Animals.CreateAnimal;
 using Kindred.Guestbook.Domain.Commands.Animals.UpdateAnimal;
 using Kindred.Guestbook.Domain.Entities;
-using System.Xml.Linq;
 using Xunit;
 
 namespace Kindred.Guestbook.Domain.Test.Entities
